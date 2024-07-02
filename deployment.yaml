@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: jalapeno
+  name: telemetry-processor
+  labels:
+    app: telemetry-processor
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: telemetry-processor
+  template:
+    metadata:
+      labels:
+        app: telemetry-processor
+    spec:
+      containers:
+      - name: telemetry-processor
+        image: iejalapeno/telemetry-processor:latest
+      imagePullSecrets:
+        - name: regcred

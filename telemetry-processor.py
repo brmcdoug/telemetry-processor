@@ -12,7 +12,8 @@ def vrf():
     pw = "jalapeno"
     dbname = "jalapeno"
 
-    client = ArangoClient(hosts='http://198.18.133.104:30852')
+    # client = ArangoClient(hosts='http://198.18.133.104:30852')
+    client = ArangoClient(hosts='http://arangodb.jalapeno:8529')
     db = client.db(dbname, username=user, password=pw)
 
     # Create Arango collection if it doesn't already exist
@@ -25,7 +26,8 @@ def vrf():
     # define Kafka consumer and topic to monitor
     consumer = KafkaConsumer(
         'jalapeno.vrf',
-        bootstrap_servers=['198.18.133.104:30092'],
+        # bootstrap_servers=['198.18.133.104:30092'],
+        bootstrap_servers=['broker.jalapeno:9092'],
         auto_offset_reset='latest',
         enable_auto_commit=False,
         group_id='jalapeno',
@@ -74,8 +76,8 @@ def srv6localsids():
     pw = "jalapeno"
     dbname = "jalapeno"
 
-    # client = ArangoClient(hosts='http://arangodb.jalapeno:8529')
-    client = ArangoClient(hosts='http://198.18.133.104:30852')
+    client = ArangoClient(hosts='http://arangodb.jalapeno:8529')
+    # client = ArangoClient(hosts='http://198.18.133.104:30852')
     db = client.db(dbname, username=user, password=pw)
 
     # Create Arango collection if it doesn't already exist
@@ -89,8 +91,8 @@ def srv6localsids():
     # define Kafka consumer and topic to monitor
     consumer = KafkaConsumer(
         'jalapeno.srv6',
-        bootstrap_servers=['198.18.133.104:30092'],
-        # bootstrap_servers=['broker.jalapeno:9092'],
+        # bootstrap_servers=['198.18.133.104:30092'],
+        bootstrap_servers=['broker.jalapeno:9092'],
         auto_offset_reset='latest',
         enable_auto_commit=False,
         group_id='jalapeno',
